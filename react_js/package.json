@@ -1,0 +1,12 @@
+{
+  "name": "indecision",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/geoffreycestaro/react_js.git",
+  "author": "geoffreycestaro <gcint2@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-env": "1.5.2",
+    "babel-preset-react": "6.24.1"
+  }
+}
