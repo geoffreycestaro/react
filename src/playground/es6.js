@@ -1,99 +1,60 @@
-// function square(x) {
-//   return x * x;
-// };
 
-// const squareArrow = (x) => {
-//   return x * x;
-// };
-
-// const squareArrow2 = (x) => x * x;
-
-// console.log(square(8));
-// console.log(squareArrow(9));
-// console.log(squareArrow2(10));
-
-// const getFn = (name) => {
-//   return name.split(' ')[0];
-// };
-
-// const getFn2 = (name) => name.split(' ')[0];
-
-// console.log(getFn('Geoffrey Cestaro'));
-// console.log(getFn2('Geoffrey Cestaro'));
-
-const add = function (a,b) {
-  console.log(arguments);
-  return a + b;
-};
-
-const add2 = (a,b) => {
-  return a + b;
-};
-
-console.log(add(50,1));
-console.log(add2(50,1));
-
-const user = {
-  name: 'Geoffrey',
-  cities: ['New York', 'San Francisco', 'Atlanta'],
-  printPlacesLived() {
-    return this.cities.map((city) => this.name + ' has lived in ' + city + '!');
-    }
-  };
-
-console.log(user.printPlacesLived());
-
-const multiplier = {
-  num: [1,2,3],
-  multiplyBy: 2,
-  multiply() {
-    return this.num.map((number) => number * this.multiplyBy);
+class Person {
+  constructor(name = 'Anonymous', age = 0) {
+    this.name = name;
+    this.age = age;
   }
-};
 
-console.log(multiplier.multiply());
+  getGreeting() {
+    return `Hi. I am ${this.name}!`;
+  }
 
-const user = {
-  name: 'Geoffrey Cestaro',
-  age: 18,
-  location: 'Atlanta, GA'
-};
+  getDescription() {
+    return `${this.name} is ${this.age} years old.`;
+  }
+}
 
-function getLocation (location) {
- if (location) {
-   return <p>Location: {location}</p>;
- } 
-};
+class Student extends Person {
+  constructor(name, age, major) {
+    super(name, age);
+    this.major = major;
+  }
+  hasMajor() {
+    return !!this.major;
+  }
 
-let count = 0;
-const addOne = () => {
-  count ++;
-  renderCounterApp();
-};
+  getDescription() {
+    let description = super.getDescription();
 
-const minusOne = () => {
-  count --;
-  renderCounterApp();
- };
+    if (this.hasMajor()) {
+      description += ` Their major is ${this.major}.`;
+    }
 
- const reset = () => {
-  count = 0;
-  renderCounterApp();
- };
+    return description;
+  }
+}
 
-const appRoot = document.getElementById('app');
+class Traveler extends Person {
+  constructor(name, age, homeLocation) {
+    super(name, age);
+    this.homeLocation = homeLocation;
+  }
+  hasLocation() {
+    return !!this.homeLocation;
+  }
 
-const renderCounterApp = () => {
-  const templateTwo = (
-    <div>
-      <h1>Count: {count}</h1>
-      <button onClick={addOne}>+1</button>
-      <button onClick={minusOne}>-1</button>
-      <button onClick={reset}>Reset</button>
-    </div>
-  );
+  getGreeting() {
+    let greeting = super.getGreeting();
 
-  ReactDOM.render(templateTwo, appRoot);
-};
+    if(this.homeLocation) {
+      greeting += ` I am visiting from ${this.homeLocation}.`;
+    }
+    return greeting;
+  }
+}
 
-renderCounterApp();
+const me = new Traveler('Geoffrey', 48, 'Atlanta');
+console.log(me.getGreeting());
+
+const other = new Traveler();
+console.log(other.getGreeting());
