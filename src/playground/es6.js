@@ -1,60 +1,29 @@
-
-class Person {
-  constructor(name = 'Anonymous', age = 0) {
-    this.name = name;
-    this.age = age;
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleAddOne = this.handleAddOne.bind(this);
+    this.handleMinusOne = this.handleMinusOne.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
-
-  getGreeting() {
-    return `Hi. I am ${this.name}!`;
+  handleAddOne() {
+    console.log('handleAddOne');
   }
-
-  getDescription() {
-    return `${this.name} is ${this.age} years old.`;
+  handleMinusOne() {
+    console.log('handleMinusOne');
   }
-}
-
-class Student extends Person {
-  constructor(name, age, major) {
-    super(name, age);
-    this.major = major;
+  handleReset() {
+    console.log('handleReset');
   }
-  hasMajor() {
-    return !!this.major;
-  }
-
-  getDescription() {
-    let description = super.getDescription();
-
-    if (this.hasMajor()) {
-      description += ` Their major is ${this.major}.`;
-    }
-
-    return description;
+  render() {
+    return (
+      <div>
+        <h1>Count: </h1>
+        <button onClick={this.handleAddOne}>+1</button>
+        <button onClick={this.handleMinusOne}>-1</button>
+        <button onClick={this.handleReset}>reset</button>
+      </div>
+    );
   }
 }
 
-class Traveler extends Person {
-  constructor(name, age, homeLocation) {
-    super(name, age);
-    this.homeLocation = homeLocation;
-  }
-  hasLocation() {
-    return !!this.homeLocation;
-  }
-
-  getGreeting() {
-    let greeting = super.getGreeting();
-
-    if(this.homeLocation) {
-      greeting += ` I am visiting from ${this.homeLocation}.`;
-    }
-    return greeting;
-  }
-}
-
-const me = new Traveler('Geoffrey', 48, 'Atlanta');
-console.log(me.getGreeting());
-
-const other = new Traveler();
-console.log(other.getGreeting());
+ReactDOM.render(<Counter />, document.getElementById('app'));
