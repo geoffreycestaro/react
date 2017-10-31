@@ -1,8 +1,3 @@
-class VisibilityToggle extends React.Component {
-  render() {
-    return <p>test</p>;
-  }
-}
 class Counter extends React.Component {
   constructor(props) {
     super(props);
